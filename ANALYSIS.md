@@ -41,12 +41,3 @@ Lists issues found, grouped by category and severity. **Fixed** indicates items 
 | High     | —        | **Error handler registered after listen**: Error middleware had no effect. | **Fixed** – Removed middleware; using NestJS exception layer. |
 
 ---
-
-## Priority order (remaining)
-
-| Priority | Item                                                |
-| -------- | --------------------------------------------------- |
-| **P1**   | In-memory storage → move to DB for persistence.     |
-| **P2**   | Pagination for GET /webhooks → add `?page=&limit=`. |
-
----
