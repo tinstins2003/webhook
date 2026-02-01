@@ -19,12 +19,12 @@ Follow these steps to run the project:
 
 **Endpoints** (all require API key):
 
-| Method | Path | Description |
-|--------|------|--------------|
-| POST | /webhooks | Create a webhook (body: `source`, `event`, optional `payload`) |
-| GET | /webhooks | List all webhooks |
-| GET | /webhooks/:id | Get a webhook by ID |
-| PATCH | /webhooks/:id | Update a webhook (body: optional `source`, `event`, `payload`) |
+| Method | Path          | Description                                                    |
+| ------ | ------------- | -------------------------------------------------------------- | -------------------------------- |
+| POST   | /webhooks     | Create a webhook (body: `source`, `event`, optional `payload`) |
+| GET    | /webhooks     | List all webhooks                                              |
+| GET    | /webhooks/:id | Get a webhook by ID                                            |
+| PATCH  | /webhooks/:id | Update a webhook (body: optional `source`, `event`, `payload`) | -> New update method for webhook |
 
 ## Changes made
 
@@ -33,7 +33,7 @@ Improvements and fixes applied to the original sample code:
 - **NestJS and structure**: Service implemented with NestJS; controller and service logic are separated for maintainability and testability.
 - **Webhook ID**: Replaced `Math.random().toString(36)` with `randomUUID()` (crypto) to avoid ID collisions.
 - **GET /webhooks/:id**: Service now throws `NotFoundException` when webhook is not found instead of using raw Express `res`.
-- **PATCH /webhooks/:id – update webhook**: New endpoint to update an existing webhook by ID. Body uses `UpdateWebhookDto`; all fields (`source`, `event`, `payload`) are optional (partial update). Returns the updated webhook or 404 if not found. *Note: Added to support editing webhook data after creation.*
+- **PATCH /webhooks/:id – update webhook**: New endpoint to update an existing webhook by ID. Body uses `UpdateWebhookDto`; all fields (`source`, `event`, `payload`) are optional (partial update). Returns the updated webhook or 404 if not found. _Note: Added to support editing webhook data after creation._
 - **Input validation**: Request body is validated via DTO (`CreateWebhookDto`, `UpdateWebhookDto`) with class-validator; `ValidationPipe` is enabled globally. Create: `source` and `event` required, `payload` optional. Update: all fields optional.
 - **Error handling**: Global `ErrorHandlerInterceptor` normalizes error responses (statusCode, message, error). Removed ineffective Express error middleware.
 - **Authentication**: `ApiKeyGuard` applied globally; requests must send a valid API key via `x-api-key` header or `Authorization: Bearer <key>`. Key is configured via `API_KEY` in `.env`.
