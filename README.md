@@ -12,6 +12,11 @@ Follow these steps to run the project:
 4. Run the project by running `yarn dev`
 5. Call endpoints with API key (see below).
 
+## How to run test
+
+- Use `yarn test` to run test in spec file
+- use `yarn test:e2e` to run e2e test
+
 **Authentication**: All webhook endpoints require an API key. Set `API_KEY` in `.env` (see `.env.example`). Send the key in one of two ways:
 
 - Header: `x-api-key: <your-api-key>`

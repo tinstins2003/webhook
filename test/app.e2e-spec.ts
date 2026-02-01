@@ -10,7 +10,7 @@ describe('AppController (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
-    process.env.API_KEY = E2E_API_KEY;
+    process.env.X_API_KEY = E2E_API_KEY;
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
