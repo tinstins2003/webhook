@@ -22,6 +22,8 @@ Follow these steps to run the project:
 - Header: `x-api-key: <your-api-key>`
 - Header: `Authorization: Bearer <your-api-key>`
 
+**Rate limit & body size**: Applied in `main.ts`. Rate limit: max `RATE_LIMIT_MAX` requests per `RATE_LIMIT_WINDOW_MS` (default 100 per 60s); response 429 when exceeded. Body size: JSON/urlencoded limited to `BODY_SIZE_LIMIT` (default `1mb`); response 413 when exceeded. Set in `.env`: `RATE_LIMIT_WINDOW_MS`, `RATE_LIMIT_MAX`, `BODY_SIZE_LIMIT`.
+
 **Endpoints** (all require API key):
 
 | Method      | Path          | Description                                                    |
@@ -42,4 +44,5 @@ Improvements and fixes applied to the original sample code:
 - **Input validation**: Request body is validated via DTO (`CreateWebhookDto`, `UpdateWebhookDto`) with class-validator; `ValidationPipe` is enabled globally. Create: `source` and `event` required, `payload` optional. Update: all fields optional.
 - **Error handling**: Global `ErrorHandlerInterceptor` normalizes error responses (statusCode, message, error). Removed ineffective Express error middleware.
 - **Authentication**: `ApiKeyGuard` applied globally; requests must send a valid API key via `x-api-key` header or `Authorization: Bearer <key>`. Key is configured via `API_KEY` in `.env`.
+- **Rate limit & body size limit**: In `main.ts`, `express-rate-limit` limits requests per window (env: `RATE_LIMIT_WINDOW_MS`, `RATE_LIMIT_MAX`); body parser uses `BODY_SIZE_LIMIT` (env, default `1mb`) to reject oversized payloads and reduce DoS risk.
 - **Tests**: Unit tests for `AppController` (create, getAll, getById, update; including 404 cases) with mocked `AppService`. E2E tests for POST/GET/PATCH webhooks (with API key), 404 for update, and 401 when key is missing.
