@@ -25,11 +25,11 @@ Follow these steps to run the project:
 **Endpoints** (all require API key):
 
 | Method | Path          | Description                                                    |
-| ------ | ------------- | -------------------------------------------------------------- | -------------------------------- |
+| ------ | ------------- | -------------------------------------------------------------- | 
 | POST   | /webhooks     | Create a webhook (body: `source`, `event`, optional `payload`) |
 | GET    | /webhooks     | List all webhooks                                              |
 | GET    | /webhooks/:id | Get a webhook by ID                                            |
-| PATCH  | /webhooks/:id | Update a webhook (body: optional `source`, `event`, `payload`) | -> New update method for webhook |
+| PATCH  | /webhooks/:id | Update a webhook (body: optional `source`, `event`, `payload`) |
 
 ## Changes made
 
